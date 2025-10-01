@@ -1,66 +1,37 @@
 "use client";
 
+import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { profileApi, type ProfileData } from "@/lib/api/profile";
+import { useProfile } from "@/hooks/useProfile";
+import { getInitials } from "@/lib/utils/image";
 import { IconEdit } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
 
 export default function ProfilePage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<ProfileData | null>(null);
-  const [activeTab, setActiveTab] = useState<"profile">("profile");
   const router = useRouter();
-
-  const loadUserProfile = useCallback(async () => {
-    try {
-      const userData = await profileApi.getProfile();
-      setUser(userData);
-    } catch (error) {
-      console.error("Erreur lors du chargement du profil:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      router.push("/auth");
-      return;
-    }
-
-    loadUserProfile();
-  }, [router, loadUserProfile]);
+  const { profile, isLoading, error } = useProfile();
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+        <LoadingSpinner size="lg" />
       </div>
     );
   }
 
-  if (!user) {
+  if (error || !profile) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Profil non trouvé
+            {error || "Profil non trouvé"}
           </h2>
           <Button onClick={() => router.push("/auth")}>Se connecter</Button>
         </div>
       </div>
     );
   }
-
-  const getInitials = (firstName?: string, lastName?: string) => {
-    if (firstName && lastName) {
-      return `${firstName[0]}${lastName[0]}`.toUpperCase();
-    }
-    return "U";
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -71,17 +42,17 @@ export default function ProfilePage() {
             {/* Avatar */}
             <div className="relative">
               <Avatar className="h-24 w-24">
-                {user.avatar && (
+                {profile.avatar && (
                   <AvatarImage
-                    src={user.avatar.replace(
+                    src={profile.avatar.replace(
                       "localhost:3000",
                       "localhost:3001"
                     )}
-                    alt={user.email}
+                    alt={profile.email}
                   />
                 )}
                 <AvatarFallback className="bg-primary text-primary-foreground text-xl font-medium">
-                  {getInitials(user.firstName, user.lastName)}
+                  {getInitials(profile.firstName, profile.lastName)}
                 </AvatarFallback>
               </Avatar>
             </div>
@@ -89,20 +60,20 @@ export default function ProfilePage() {
             {/* Informations du profil */}
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {user.firstName && user.lastName
-                  ? `${user.firstName} ${user.lastName}`
-                  : user.email}
+                {profile.firstName && profile.lastName
+                  ? `${profile.firstName} ${profile.lastName}`
+                  : profile.email}
               </h1>
 
-              {user.bio && (
-                <p className="text-gray-600 mb-4 max-w-2xl">{user.bio}</p>
+              {profile.bio && (
+                <p className="text-gray-600 mb-4 max-w-2xl">{profile.bio}</p>
               )}
 
               <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
-                {user.location && <span>📍 {user.location}</span>}
-                {user.website && (
+                {profile.location && <span>📍 {profile.location}</span>}
+                {profile.website && (
                   <a
-                    href={user.website}
+                    href={profile.website}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800"
@@ -110,9 +81,9 @@ export default function ProfilePage() {
                     🌐 Site web
                   </a>
                 )}
-                {user.instagram && (
+                {profile.instagram && (
                   <a
-                    href={`https://instagram.com/${user.instagram.replace(
+                    href={`https://instagram.com/${profile.instagram.replace(
                       "@",
                       ""
                     )}`}
@@ -120,7 +91,7 @@ export default function ProfilePage() {
                     rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800"
                   >
-                    📷 {user.instagram}
+                    📷 {profile.instagram}
                   </a>
                 )}
               </div>
@@ -145,20 +116,20 @@ export default function ProfilePage() {
           <div className="space-y-4">
             <div>
               <h3 className="font-medium text-gray-900 mb-1">
-                Type d'utilisateur
+                Type d&apos;utilisateur
               </h3>
-              <p className="text-gray-600 capitalize">{user.userType}</p>
+              <p className="text-gray-600 capitalize">{profile.userType}</p>
             </div>
-            {user.phone && (
+            {profile.phone && (
               <div>
                 <h3 className="font-medium text-gray-900 mb-1">Téléphone</h3>
-                <p className="text-gray-600">{user.phone}</p>
+                <p className="text-gray-600">{profile.phone}</p>
               </div>
             )}
             <div>
               <h3 className="font-medium text-gray-900 mb-1">Membre depuis</h3>
               <p className="text-gray-600">
-                {new Date(user.createdAt).toLocaleDateString("fr-FR", {
+                {new Date(profile.createdAt).toLocaleDateString("fr-FR", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",

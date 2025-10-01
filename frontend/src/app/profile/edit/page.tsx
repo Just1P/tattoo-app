@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { ProfileForm } from "@/components/profile/profile-form";
 import {
   Card,
@@ -8,40 +9,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { profileApi, type ProfileData } from "@/lib/api/profile";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useProfile } from "@/hooks/useProfile";
 
 export default function EditProfilePage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<ProfileData | null>(null);
-  const router = useRouter();
-
-  const loadUserProfile = useCallback(async () => {
-    try {
-      const userData = await profileApi.getProfile();
-      setUser(userData);
-    } catch (error) {
-      console.error("Erreur lors du chargement du profil:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      router.push("/auth");
-      return;
-    }
-
-    loadUserProfile();
-  }, [router, loadUserProfile]);
+  const { profile, isLoading, loadProfile } = useProfile();
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+        <LoadingSpinner size="lg" />
       </div>
     );
   }
@@ -59,7 +35,7 @@ export default function EditProfilePage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ProfileForm user={user} onProfileUpdate={loadUserProfile} />
+            <ProfileForm user={profile} onProfileUpdate={loadProfile} />
           </CardContent>
         </Card>
       </div>
