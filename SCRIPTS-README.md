@@ -131,3 +131,5 @@ pnpm install  # ou npm install
 - Utilisez `stop-app.sh` pour un arrêt propre de tous les services
 - Les scripts gèrent automatiquement pnpm et npm
 
+
+

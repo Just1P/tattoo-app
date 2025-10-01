@@ -17,7 +17,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfileService } from './profile.service';
 
-interface AuthenticatedRequest {
+export interface AuthenticatedRequest {
   user: {
     id: string;
     email: string;
