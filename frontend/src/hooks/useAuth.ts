@@ -1,60 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { authApi } from "@/lib/api/auth";
-import { profileApi } from "@/lib/api/profile";
+import { useUser } from "@/lib/contexts/UserContext";
 import type { LoginFormData, RegisterFormData } from "@/lib/validations/auth";
 
-interface User {
-  email: string;
-  firstName?: string;
-  lastName?: string;
-  avatar?: string;
-}
-
 export function useAuth() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { user, refreshUser } = useUser();
 
-  const loadUserData = useCallback(async () => {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      setIsLoggedIn(false);
-      setUser(null);
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const userData = await profileApi.getProfile();
-      setUser({
-        email: userData.email,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        avatar: userData.avatar,
-      });
-      setIsLoggedIn(true);
-    } catch (error) {
-      console.error("Erreur lors du chargement du profil:", error);
-      // En cas d'erreur, utiliser des données par défaut
-      setUser({
-        email: "user@example.com",
-        firstName: "Utilisateur",
-        lastName: "Test",
-      });
-      setIsLoggedIn(true);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadUserData();
-  }, [loadUserData]);
+  const isLoggedIn = !!user;
 
   const login = useCallback(
     async (data: LoginFormData) => {
@@ -62,7 +20,7 @@ export function useAuth() {
       try {
         const response = await authApi.login(data);
         localStorage.setItem("access_token", response.access_token);
-        await loadUserData();
+        await refreshUser();
         router.push("/");
       } catch (error) {
         throw error;
@@ -70,7 +28,7 @@ export function useAuth() {
         setIsLoading(false);
       }
     },
-    [loadUserData, router]
+    [refreshUser, router]
   );
 
   const register = useCallback(
@@ -81,7 +39,7 @@ export function useAuth() {
         void confirmPassword;
         const response = await authApi.register(registerData);
         localStorage.setItem("access_token", response.access_token);
-        await loadUserData();
+        await refreshUser();
         router.push("/profile");
       } catch (error) {
         throw error;
@@ -89,13 +47,11 @@ export function useAuth() {
         setIsLoading(false);
       }
     },
-    [loadUserData, router]
+    [refreshUser, router]
   );
 
   const logout = useCallback(() => {
     localStorage.removeItem("access_token");
-    setIsLoggedIn(false);
-    setUser(null);
     router.push("/auth");
   }, [router]);
 
@@ -114,6 +70,6 @@ export function useAuth() {
     register,
     logout,
     getInitials,
-    refreshUser: loadUserData,
+    refreshUser,
   };
 }

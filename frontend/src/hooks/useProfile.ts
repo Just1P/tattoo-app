@@ -1,34 +1,40 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { profileApi, type ProfileData } from "@/lib/api/profile";
+import { useUser } from "@/lib/contexts/UserContext";
 import type { ProfileFormData } from "@/lib/validations/profile";
 
 export function useProfile() {
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { user, refreshUser } = useUser();
+
+  // Convertir l'utilisateur en ProfileData pour la compatibilité
+  const profile: ProfileData | null = user
+    ? {
+        id: "", // L'ID n'est pas disponible dans le contexte utilisateur
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        avatar: user.avatar,
+        userType: (user.userType as "client" | "artist") || "client",
+        phone: user.phone,
+        bio: user.bio,
+        location: user.location,
+        website: user.website,
+        instagram: user.instagram,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
+    : null;
 
   const loadProfile = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const userData = await profileApi.getProfile();
-      setProfile(userData);
-    } catch (err) {
-      console.error("Erreur lors du chargement du profil:", err);
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Erreur lors du chargement du profil"
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+    await refreshUser();
+  }, [refreshUser]);
 
   const updateProfile = useCallback(
     async (data: ProfileFormData) => {
@@ -36,7 +42,7 @@ export function useProfile() {
         setIsLoading(true);
         setError(null);
         await profileApi.updateProfile(data);
-        await loadProfile();
+        await refreshUser(); // Rafraîchir les données utilisateur
         router.push("/dashboard");
       } catch (err) {
         setError(
@@ -47,27 +53,22 @@ export function useProfile() {
         setIsLoading(false);
       }
     },
-    [loadProfile, router]
+    [refreshUser, router]
   );
 
-  const uploadAvatar = useCallback(async (file: File) => {
-    try {
-      const result = await profileApi.uploadAvatar(file);
-      return result.avatarUrl;
-    } catch (err) {
-      console.error("Erreur lors de l'upload de l'avatar:", err);
-      throw new Error("Erreur lors de l'upload de l'avatar");
-    }
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (!token) {
-      router.push("/auth");
-      return;
-    }
-    loadProfile();
-  }, [loadProfile, router]);
+  const uploadAvatar = useCallback(
+    async (file: File) => {
+      try {
+        const result = await profileApi.uploadAvatar(file);
+        await refreshUser(); // Rafraîchir les données utilisateur après l'upload
+        return result.avatarUrl;
+      } catch (err) {
+        console.error("Erreur lors de l'upload de l'avatar:", err);
+        throw new Error("Erreur lors de l'upload de l'avatar");
+      }
+    },
+    [refreshUser]
+  );
 
   const getInitials = useCallback((firstName?: string, lastName?: string) => {
     if (firstName && lastName) {
