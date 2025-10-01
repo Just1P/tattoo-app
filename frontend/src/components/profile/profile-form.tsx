@@ -4,9 +4,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { useProfile } from "@/hooks/useProfile";
-import type { ProfileData, ProfileFormData } from "@/lib/api/profile";
-import { AvatarUpload } from "./AvatarUpload";
-import { ProfileFormFields } from "./ProfileFormFields";
+import type { ProfileData, UpdateProfileData } from "@/lib/api/profile";
+import { AvatarUpload, ProfileFormFields } from "./components";
 
 interface ProfileFormProps {
   user: ProfileData | null;
@@ -27,7 +26,7 @@ export function ProfileForm({ user, onProfileUpdate }: ProfileFormProps) {
     setError(errorMessage);
   };
 
-  const handleSubmit = async (data: ProfileFormData) => {
+  const handleSubmit = async (data: UpdateProfileData) => {
     try {
       setError(null);
 
@@ -36,7 +35,13 @@ export function ProfileForm({ user, onProfileUpdate }: ProfileFormProps) {
         avatarUrl = await uploadAvatar(avatarFile);
       }
 
-      const profileData = avatarUrl ? { ...data, avatar: avatarUrl } : data;
+      const profileData = avatarUrl
+        ? {
+            ...data,
+            avatar: avatarUrl,
+            userType: data.userType || "client",
+          }
+        : { ...data, userType: data.userType || "client" };
       await updateProfile(profileData);
       await onProfileUpdate();
     } catch (err) {

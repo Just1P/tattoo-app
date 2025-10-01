@@ -12,8 +12,7 @@ import {
 } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
 import type { LoginFormData, RegisterFormData } from "@/lib/validations/auth";
-import { LoginForm } from "./LoginForm";
-import { RegisterForm } from "./RegisterForm";
+import { LoginForm, RegisterForm } from "./components";
 
 type AuthMode = "login" | "register";
 

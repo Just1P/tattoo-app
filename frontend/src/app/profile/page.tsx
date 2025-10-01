@@ -1,16 +1,22 @@
 "use client";
 
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
+import { CreatePostForm, PostCard } from "@/components/posts";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useMyPosts } from "@/hooks/usePosts";
 import { useProfile } from "@/hooks/useProfile";
 import { getInitials } from "@/lib/utils/image";
-import { IconEdit } from "@tabler/icons-react";
+import { IconEdit, IconPlus } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function ProfilePage() {
   const router = useRouter();
   const { profile, isLoading, error } = useProfile();
+  const { posts, isLoading: postsLoading } = useMyPosts();
+  const [showCreateForm, setShowCreateForm] = useState(false);
 
   if (isLoading) {
     return (
@@ -35,11 +41,9 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header du profil */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-6">
-            {/* Avatar */}
             <div className="relative">
               <Avatar className="h-24 w-24">
                 {profile.avatar && (
@@ -57,7 +61,6 @@ export default function ProfilePage() {
               </Avatar>
             </div>
 
-            {/* Informations du profil */}
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 {profile.firstName && profile.lastName
@@ -103,41 +106,124 @@ export default function ProfilePage() {
                     Modifier le profil
                   </a>
                 </Button>
+                {profile.userType === "artist" && (
+                  <Button onClick={() => setShowCreateForm(true)}>
+                    <IconPlus className="h-4 w-4 mr-2" />
+                    Créer un post
+                  </Button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Contenu du profil */}
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">À propos</h2>
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-medium text-gray-900 mb-1">
-                Type d&apos;utilisateur
-              </h3>
-              <p className="text-gray-600 capitalize">{profile.userType}</p>
-            </div>
-            {profile.phone && (
-              <div>
-                <h3 className="font-medium text-gray-900 mb-1">Téléphone</h3>
-                <p className="text-gray-600">{profile.phone}</p>
+        <Tabs defaultValue="about" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="about">À propos</TabsTrigger>
+            <TabsTrigger value="posts">Mes posts</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="about">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">
+                À propos
+              </h2>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-1">
+                    Type d&apos;utilisateur
+                  </h3>
+                  <p className="text-gray-600 capitalize">{profile.userType}</p>
+                </div>
+                {profile.phone && (
+                  <div>
+                    <h3 className="font-medium text-gray-900 mb-1">
+                      Téléphone
+                    </h3>
+                    <p className="text-gray-600">{profile.phone}</p>
+                  </div>
+                )}
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-1">
+                    Membre depuis
+                  </h3>
+                  <p className="text-gray-600">
+                    {new Date(profile.createdAt).toLocaleDateString("fr-FR", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </p>
+                </div>
               </div>
-            )}
-            <div>
-              <h3 className="font-medium text-gray-900 mb-1">Membre depuis</h3>
-              <p className="text-gray-600">
-                {new Date(profile.createdAt).toLocaleDateString("fr-FR", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </p>
             </div>
-          </div>
-        </div>
+          </TabsContent>
+
+          <TabsContent value="posts">
+            <div className="space-y-6">
+              {profile.userType === "artist" && (
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-semibold text-gray-900">
+                      Créer un post
+                    </h2>
+                    {!showCreateForm && (
+                      <Button onClick={() => setShowCreateForm(true)}>
+                        <IconPlus className="h-4 w-4 mr-2" />
+                        Nouveau post
+                      </Button>
+                    )}
+                  </div>
+
+                  {showCreateForm && (
+                    <div className="border-t pt-6">
+                      <CreatePostForm
+                        onSuccess={() => {
+                          setShowCreateForm(false);
+                        }}
+                        onCancel={() => setShowCreateForm(false)}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-gray-900">
+                  {profile.userType === "artist"
+                    ? "Mes posts"
+                    : "Posts récents"}
+                </h2>
+
+                {postsLoading ? (
+                  <div className="flex justify-center py-8">
+                    <LoadingSpinner size="lg" />
+                  </div>
+                ) : posts.length === 0 ? (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">
+                      {profile.userType === "artist"
+                        ? "Vous n'avez pas encore créé de posts."
+                        : "Aucun post disponible."}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {posts.map((post) => (
+                      <PostCard
+                        key={post.id}
+                        post={post}
+                        showActions={profile.userType === "artist"}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

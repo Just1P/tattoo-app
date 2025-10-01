@@ -14,15 +14,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import type { UserRequest } from '../auth/interfaces';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfileService } from './profile.service';
-
-export interface AuthenticatedRequest {
-  user: {
-    id: string;
-    email: string;
-  };
-}
 
 @Controller('profile')
 @UseGuards(JwtAuthGuard)
@@ -30,13 +24,13 @@ export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Get()
-  async getProfile(@Request() req: AuthenticatedRequest) {
+  async getProfile(@Request() req: UserRequest) {
     return this.profileService.getProfile(req.user.id);
   }
 
   @Put()
   async updateProfile(
-    @Request() req: AuthenticatedRequest,
+    @Request() req: UserRequest,
     @Body() updateProfileDto: UpdateProfileDto,
   ) {
     return this.profileService.updateProfile(req.user.id, updateProfileDto);
@@ -69,7 +63,7 @@ export class ProfileController {
     }),
   )
   async uploadAvatar(
-    @Request() req: AuthenticatedRequest,
+    @Request() req: UserRequest,
     @UploadedFile() file: Express.Multer.File,
   ) {
     if (!file) {

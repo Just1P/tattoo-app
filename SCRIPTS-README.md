@@ -130,6 +130,3 @@ pnpm install  # ou npm install
 - Le script `quick-start.sh` est utile pour les tests rapides
 - Utilisez `stop-app.sh` pour un arrêt propre de tous les services
 - Les scripts gèrent automatiquement pnpm et npm
-
-
-

@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { Post } from './posts/entities/post.entity';
+import { PostsModule } from './posts/posts.module';
 import { ProfileModule } from './profile/profile.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
@@ -16,12 +18,13 @@ import { UsersModule } from './users/users.module';
       username: process.env.DB_USERNAME || 'postgres',
       password: process.env.DB_PASSWORD || 'password',
       database: process.env.DB_NAME || 'tattoo-app',
-      entities: [User],
+      entities: [User, Post],
       synchronize: process.env.NODE_ENV !== 'production',
     }),
     AuthModule,
     UsersModule,
     ProfileModule,
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -59,7 +59,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       });
     } catch (error) {
       console.error("Erreur lors du chargement du profil:", error);
-      // En cas d'erreur, utiliser des données par défaut
       setUser({
         email: "user@example.com",
         firstName: "Utilisateur",

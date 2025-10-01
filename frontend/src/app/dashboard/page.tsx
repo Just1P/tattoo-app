@@ -78,7 +78,6 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
-        {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold">Dashboard</h1>
@@ -90,7 +89,6 @@ export default function DashboardPage() {
           </Button>
         </div>
 
-        {/* Profile Card */}
         <Card className="mb-8">
           <CardHeader>
             <div className="flex justify-between items-start">
@@ -211,7 +209,6 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Card
             className="hover:shadow-md transition-shadow cursor-pointer"

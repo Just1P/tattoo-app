@@ -1,3 +1,4 @@
 export { AuthForm } from "./auth-form";
-export { LoginForm } from "./LoginForm";
-export { RegisterForm } from "./RegisterForm";
+
+// Export des sous-composants depuis le dossier components
+export { LoginForm, RegisterForm } from "./components";

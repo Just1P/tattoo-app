@@ -1,0 +1,51 @@
+
+> frontend@0.1.0 dev /Users/adm_jpitra/tattoo-app/frontend
+> next dev --turbopack
+
+   ▲ Next.js 15.5.4 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.51:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 918ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1808ms
+ GET / 200 in 2041ms
+ GET / 200 in 80ms
+ GET / 200 in 86ms
+ ✓ Compiled /favicon.ico in 121ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 373ms
+ ✓ Compiled /auth in 402ms
+ GET /auth 200 in 438ms
+Image with src "/auth-image.jpg" is using quality "85" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET /auth 200 in 127ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 240ms
+ ✓ Compiled /profile in 269ms
+ GET /profile 200 in 310ms
+ GET /profile 200 in 158ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 261ms
+ ✓ Compiled /profile/edit in 413ms
+ GET /profile/edit 200 in 660ms
+ ✓ Compiled /dashboard in 194ms
+ GET /dashboard 200 in 234ms
+ GET /profile/edit 200 in 59ms
+ GET /dashboard 200 in 42ms
+ GET /profile 200 in 41ms
+ GET /profile 200 in 486ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 634ms
+ ✓ Compiled in 206ms
+ ✓ Compiled in 147ms
+ ✓ Compiled in 458ms
+ ✓ Compiled in 125ms
+ ✓ Compiled in 68ms
+ ✓ Compiled in 577ms
+ ✓ Compiled in 191ms
+ GET /profile 200 in 304ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 1025ms
+ GET /profile 200 in 55ms
+ GET /profile/edit 200 in 104ms
+ GET /dashboard 200 in 42ms
+ ✓ Compiled in 51ms
+[?25h

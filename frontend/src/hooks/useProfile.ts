@@ -13,10 +13,9 @@ export function useProfile() {
   const router = useRouter();
   const { user, refreshUser } = useUser();
 
-  // Convertir l'utilisateur en ProfileData pour la compatibilité
   const profile: ProfileData | null = user
     ? {
-        id: "", // L'ID n'est pas disponible dans le contexte utilisateur
+        id: "",
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -42,7 +41,7 @@ export function useProfile() {
         setIsLoading(true);
         setError(null);
         await profileApi.updateProfile(data);
-        await refreshUser(); // Rafraîchir les données utilisateur
+        await refreshUser();
         router.push("/dashboard");
       } catch (err) {
         setError(
@@ -60,7 +59,7 @@ export function useProfile() {
     async (file: File) => {
       try {
         const result = await profileApi.uploadAvatar(file);
-        await refreshUser(); // Rafraîchir les données utilisateur après l'upload
+        await refreshUser();
         return result.avatarUrl;
       } catch (err) {
         console.error("Erreur lors de l'upload de l'avatar:", err);

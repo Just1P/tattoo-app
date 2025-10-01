@@ -1,3 +1,4 @@
-export { AvatarUpload } from "./AvatarUpload";
 export { ProfileForm } from "./profile-form";
-export { ProfileFormFields } from "./ProfileFormFields";
+
+// Export des sous-composants depuis le dossier components
+export { AvatarUpload, ProfileFormFields } from "./components";

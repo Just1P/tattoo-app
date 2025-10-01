@@ -16,7 +16,7 @@ export const USER_TYPES = {
   ARTIST: "artist",
 } as const;
 
-export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+export const MAX_FILE_SIZE = 5 * 1024 * 1024;
 export const ALLOWED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
@@ -24,5 +24,5 @@ export const ALLOWED_IMAGE_TYPES = [
   "image/gif",
 ];
 
-export const AVATAR_MAX_SIZE = 400; // pixels
+export const AVATAR_MAX_SIZE = 400;
 export const AVATAR_QUALITY = 0.8;

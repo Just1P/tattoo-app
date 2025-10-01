@@ -2,15 +2,13 @@
 
 import { usePathname } from "next/navigation";
 
-import { Logo } from "./navigation/Logo";
-import { NavLinks } from "./navigation/NavLinks";
-import { UserMenu } from "./navigation/UserMenu";
+import { Logo, NavLinks, UserMenu } from "./navigation/";
 
 export default function Navigation() {
   const pathname = usePathname();
 
   if (pathname.startsWith("/auth")) {
-    return null; // Ne pas afficher la navigation sur les pages d'authentification
+    return null;
   }
 
   return (
