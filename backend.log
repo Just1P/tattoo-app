@@ -1,0 +1,445 @@
+
+> backend@0.0.1 start:dev /Users/adm_jpitra/tattoo-app/backend
+> nest start --watch
+
+[2J[3J[H[[90m8:37:18 PM[0m] Starting compilation in watch mode...
+
+[[90m8:37:20 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +24ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +67ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +13ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+[31m[Nest] 44502  - [39m10/01/2025, 8:37:21 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::1338[39m[38;5;3m +1ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::1338
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+platform-express@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-val_b526c34b153db673bc7f39ff71491a51/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:178:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async bootstrap (/Users/adm_jpitra/tattoo-app/backend/src/main.ts:29:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 1338
+}
+
+Node.js v22.19.0
+[2J[3J[H[[90m8:46:44 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:46:44 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 50377  - [39m10/01/2025, 8:46:45 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:46:45 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +25ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:46:45 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:46:45 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:46:45 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[31m[Nest] 50377  - [39m10/01/2025, 8:46:45 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 50377  - [39m10/01/2025, 8:46:48 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (2)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 50377  - [39m10/01/2025, 8:46:51 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (3)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 50377  - [39m10/01/2025, 8:46:54 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (4)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 50377  - [39m10/01/2025, 8:46:57 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (5)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 50377  - [39m10/01/2025, 8:47:00 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (6)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 50377  - [39m10/01/2025, 8:47:03 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (7)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 50377  - [39m10/01/2025, 8:47:06 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (8)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +3081ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +20ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +3ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+[31m[Nest] 50377  - [39m10/01/2025, 8:47:09 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3001[39m[38;5;3m +1ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+platform-express@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-val_b526c34b153db673bc7f39ff71491a51/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:178:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async bootstrap (/Users/adm_jpitra/tattoo-app/backend/src/main.ts:29:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v22.19.0
+[2J[3J[H[[90m8:48:38 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:48:38 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +19ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +35ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +6ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51334  - [39m10/01/2025, 8:48:38 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+🚀 Application démarrée sur le port 1338
+[2J[3J[H[[90m8:48:46 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:48:46 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +19ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +35ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+[31m[Nest] 51423  - [39m10/01/2025, 8:48:47 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3001[39m[38;5;3m +1ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+platform-express@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-val_b526c34b153db673bc7f39ff71491a51/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:178:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async bootstrap (/Users/adm_jpitra/tattoo-app/backend/src/main.ts:29:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v22.19.0
+[2J[3J[H[[90m8:48:49 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:48:50 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +17ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +47ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51460  - [39m10/01/2025, 8:48:50 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+🚀 Application démarrée sur le port 3001
+[2J[3J[H[[90m8:49:35 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:49:35 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +19ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +55ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +6ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+[31m[Nest] 51883  - [39m10/01/2025, 8:49:35 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3002[39m[38;5;3m +1ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3002
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+platform-express@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-val_b526c34b153db673bc7f39ff71491a51/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:178:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async bootstrap (/Users/adm_jpitra/tattoo-app/backend/src/main.ts:29:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3002
+}
+
+Node.js v22.19.0
+[2J[3J[H[[90m8:49:37 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:49:37 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +18ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +48ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 51910  - [39m10/01/2025, 8:49:38 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +1ms[39m
+🚀 Application démarrée sur le port 3002
+[2J[3J[H[[90m8:52:06 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:52:06 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 53097  - [39m10/01/2025, 8:52:06 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 53097  - [39m10/01/2025, 8:52:06 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +19ms[39m
+[32m[Nest] 53097  - [39m10/01/2025, 8:52:06 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 53097  - [39m10/01/2025, 8:52:06 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 53097  - [39m10/01/2025, 8:52:06 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[31m[Nest] 53097  - [39m10/01/2025, 8:52:06 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[2J[3J[H[[90m8:52:08 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:52:08 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 53148  - [39m10/01/2025, 8:52:09 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 53148  - [39m10/01/2025, 8:52:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +19ms[39m
+[32m[Nest] 53148  - [39m10/01/2025, 8:52:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 53148  - [39m10/01/2025, 8:52:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 53148  - [39m10/01/2025, 8:52:09 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:09 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:12 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (2)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:15 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (3)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:18 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (4)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:21 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (5)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:24 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (6)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:27 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (7)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:30 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (8)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:33 PM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (9)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 53148  - [39m10/01/2025, 8:52:33 PM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39mAggregateError [ECONNREFUSED]: 
+[90m    at internalConnectMultiple (node:net:1134:18)[39m
+[90m    at afterConnectMultiple (node:net:1715:7)[39m {
+  code: [32m'ECONNREFUSED'[39m,
+  [errors]: [
+    Error: connect ECONNREFUSED ::1:5433
+    [90m    at createConnectionError (node:net:1678:14)[39m
+    [90m    at afterConnectMultiple (node:net:1708:16)[39m {
+      errno: [33m-61[39m,
+      code: [32m'ECONNREFUSED'[39m,
+      syscall: [32m'connect'[39m,
+      address: [32m'::1'[39m,
+      port: [33m5433[39m
+    },
+    Error: connect ECONNREFUSED 127.0.0.1:5433
+    [90m    at createConnectionError (node:net:1678:14)[39m
+    [90m    at afterConnectMultiple (node:net:1708:16)[39m {
+      errno: [33m-61[39m,
+      code: [32m'ECONNREFUSED'[39m,
+      syscall: [32m'connect'[39m,
+      address: [32m'127.0.0.1'[39m,
+      port: [33m5433[39m
+    }
+  ]
+}
+[2J[3J[H[[90m9:35:28 PM[0m] File change detected. Starting incremental compilation...
+
+[[90m9:35:28 PM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +28ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +54ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUsersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProfileModule dependencies initialized[39m[38;5;3m +18ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/register, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProfileController {/profile}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/profile/avatar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[31m[Nest] 78850  - [39m10/01/2025, 9:35:29 PM [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3001[39m[38;5;3m +0ms[39m
+node:net:1940
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at ExpressAdapter.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+platform-express@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-val_b526c34b153db673bc7f39ff71491a51/node_modules/@nestjs/platform-express/adapters/express-adapter.js:127:32)
+    at /Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:188:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (/Users/adm_jpitra/tattoo-app/backend/node_modules/.pnpm/@nestjs+core@11.1.6_@nestjs+common@11.1.6_class-transformer@0.5.1_class-validator@0.14._6b43ae8343efe3323bb5fcd8a3d61ef5/node_modules/@nestjs/core/nest-application.js:178:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async bootstrap (/Users/adm_jpitra/tattoo-app/backend/src/main.ts:29:3) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v22.19.0

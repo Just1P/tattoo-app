@@ -21,17 +21,12 @@ export default function ProfilePage() {
     try {
       const userData = await profileApi.getProfile();
       setUser(userData);
-
-      if (userData && userData.userType) {
-        router.push("/dashboard");
-        return;
-      }
     } catch (error) {
       console.error("Erreur lors du chargement du profil:", error);
     } finally {
       setIsLoading(false);
     }
-  }, [router]);
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");

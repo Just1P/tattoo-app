@@ -65,7 +65,7 @@ export class ProfileService {
       throw new NotFoundException('Utilisateur non trouvé');
     }
 
-    user.avatar = `http://localhost:3000/uploads/avatars/${avatarFilename}`;
+    user.avatar = `http://localhost:3001/uploads/avatars/${avatarFilename}`;
     await this.userRepository.save(user);
 
     return {

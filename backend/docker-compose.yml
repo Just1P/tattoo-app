@@ -1,9 +1,32 @@
 services:
+  backend:
+    build: .
+    container_name: tattoo-backend
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=tattoo-app
+      - JWT_SECRET=votre-secret-jwt-super-securise-changez-moi
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/tattoo-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+
   postgres:
     image: postgres:15
-    container_name: tatoo-postgres
+    container_name: tattoo-postgres
     environment:
-      POSTGRES_DB: tatoo_app
+      POSTGRES_DB: tattoo-app
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
@@ -19,7 +42,7 @@ services:
 
   adminer:
     image: adminer:latest
-    container_name: tatoo-adminer
+    container_name: tattoo-adminer
     ports:
       - '8080:8080'
     depends_on:

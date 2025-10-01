@@ -217,10 +217,31 @@ export function ProfileForm({ user, onProfileUpdate }: ProfileFormProps) {
           <div className="relative w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
             {avatarPreview || user?.avatar ? (
               <Image
-                src={avatarPreview || user?.avatar || ""}
+                src={
+                  avatarPreview ||
+                  (user?.avatar?.startsWith("http")
+                    ? user.avatar.replace("localhost:3000", "localhost:3001")
+                    : `${
+                        process.env.NEXT_PUBLIC_API_URL ||
+                        "http://localhost:3001"
+                      }${user?.avatar}`)
+                }
                 alt="Avatar"
                 fill
                 className="object-cover rounded-full"
+                onError={(e) => {
+                  console.error("Erreur de chargement de l'image:", e);
+                  console.log(
+                    "URL de l'avatar:",
+                    avatarPreview || user?.avatar
+                  );
+                }}
+                onLoad={() => {
+                  console.log(
+                    "Image chargée avec succès:",
+                    avatarPreview || user?.avatar
+                  );
+                }}
               />
             ) : (
               <User className="w-12 h-12 text-gray-400" />

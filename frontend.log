@@ -1,0 +1,56 @@
+
+> frontend@0.1.0 dev /Users/adm_jpitra/tattoo-app/frontend
+> next dev --turbopack
+
+   ▲ Next.js 15.5.4 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.51:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 778ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1641ms
+ GET / 200 in 1899ms
+ GET / 200 in 78ms
+ ✓ Compiled /_not-found/page in 172ms
+ GET /uploads/avatars/avatar-1759347342003-383849249.jpg 404 in 229ms
+ ✓ Compiled /profile in 434ms
+ GET /profile 200 in 516ms
+ ⨯ upstream image response failed for http://localhost:3000/uploads/avatars/avatar-1759347342003-383849249.jpg 404
+ GET /uploads/avatars/avatar-1759347342003-383849249.jpg 404 in 46ms
+ ⨯ upstream image response failed for http://localhost:3000/uploads/avatars/avatar-1759347342003-383849249.jpg 404
+ GET /uploads/avatars/avatar-1759347342003-383849249.jpg 404 in 52ms
+ ✓ Compiled /dashboard in 167ms
+ GET /dashboard 200 in 193ms
+ ✓ Compiled /profile/edit in 187ms
+ GET /profile/edit 200 in 222ms
+ ⨯ upstream image response failed for http://localhost:3000/uploads/avatars/avatar-1759347563947-857619081.jpg 404
+ GET /uploads/avatars/avatar-1759347563947-857619081.jpg 404 in 55ms
+ GET /profile 200 in 52ms
+ ⨯ upstream image response failed for http://localhost:3000/uploads/avatars/avatar-1759347563947-857619081.jpg 404
+ GET /uploads/avatars/avatar-1759347563947-857619081.jpg 404 in 49ms
+ ✓ Compiled /auth in 203ms
+ GET /auth 200 in 236ms
+Image with src "/auth-image.jpg" is using quality "85" which is not configured in images.qualities. This config will be required starting in Next.js 16.
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET /auth 200 in 134ms
+ ✓ Compiled /favicon.ico in 111ms
+ GET /favicon.ico?favicon.0b3bf435.ico 200 in 370ms
+ GET /profile 200 in 100ms
+ GET /dashboard 200 in 54ms
+ GET /profile 200 in 44ms
+ ⨯ upstream image response failed for http://localhost:3000/uploads/avatars/avatar-1759347622608-702850732.jpg 404
+ GET /uploads/avatars/avatar-1759347622608-702850732.jpg 404 in 53ms
+ ⨯ upstream image response failed for http://localhost:3000/uploads/avatars/avatar-1759347622608-702850732.jpg 404
+ GET /uploads/avatars/avatar-1759347622608-702850732.jpg 404 in 74ms
+ ✓ Compiled in 78ms
+ GET /dashboard 200 in 55ms
+ GET /profile 200 in 114ms
+ GET /dashboard 200 in 61ms
+ GET / 200 in 54ms
+ GET /profile 200 in 53ms
+ GET / 200 in 59ms
+ GET /dashboard 200 in 42ms
+ GET /profile 200 in 38ms
+ GET /dashboard 200 in 27ms

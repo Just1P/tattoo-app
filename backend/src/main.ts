@@ -20,15 +20,15 @@ async function bootstrap() {
   });
 
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://localhost:3002'],
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3001);
   console.log(
-    `🚀 Application démarrée sur le port ${process.env.PORT ?? 3000}`,
+    `🚀 Application démarrée sur le port ${process.env.PORT ?? 3001}`,
   );
 }
 bootstrap();
