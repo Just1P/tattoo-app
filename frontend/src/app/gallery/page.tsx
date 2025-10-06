@@ -29,7 +29,7 @@ export default function GalleryPage() {
   const [category, setCategory] = useState<PostCategory | "">("");
   const [showFilters, setShowFilters] = useState(false);
 
-  const { posts, isLoading, error } = usePosts({
+  const { posts, isLoading, error, likePost, unlikePost } = usePosts({
     search: search || undefined,
     category: (category || undefined) as PostCategory | undefined,
     limit: 50,
@@ -158,7 +158,13 @@ export default function GalleryPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {posts.map((post) => (
-              <PostCard key={post.id} post={post} showActions={true} />
+              <PostCard
+                key={post.id}
+                post={post}
+                showActions
+                onLike={likePost}
+                onUnlike={unlikePost}
+              />
             ))}
           </div>
         )}

@@ -15,7 +15,13 @@ import { useRef, useState } from "react";
 export default function ProfilePage() {
   const router = useRouter();
   const { profile, isLoading, error } = useProfile();
-  const { posts, isLoading: postsLoading, refetchMyPosts } = useMyPosts();
+  const {
+    posts,
+    isLoading: postsLoading,
+    refetchMyPosts,
+    likePost,
+    unlikePost,
+  } = useMyPosts();
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [activeTab, setActiveTab] = useState("about");
   const firstPostRef = useRef<HTMLDivElement>(null);
@@ -239,6 +245,8 @@ export default function ProfilePage() {
                             post={post}
                             showActions={profile.userType === "artist"}
                             hideProfileButton
+                            onLike={likePost}
+                            onUnlike={unlikePost}
                           />
                         </div>
                       ))}

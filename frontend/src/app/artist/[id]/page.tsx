@@ -36,6 +36,28 @@ export default function ArtistPublicProfilePage() {
   const [isLoadingPosts, setIsLoadingPosts] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const handleLike = async (postId: string) => {
+    try {
+      const updatedPost = await postsApi.like(postId);
+      setPosts((prev) =>
+        prev.map((post) => (post.id === postId ? updatedPost : post))
+      );
+    } catch (err) {
+      console.error("Erreur lors du like:", err);
+    }
+  };
+
+  const handleUnlike = async (postId: string) => {
+    try {
+      const updatedPost = await postsApi.unlike(postId);
+      setPosts((prev) =>
+        prev.map((post) => (post.id === postId ? updatedPost : post))
+      );
+    } catch (err) {
+      console.error("Erreur lors du unlike:", err);
+    }
+  };
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -208,6 +230,8 @@ export default function ArtistPublicProfilePage() {
                 post={post}
                 showActions
                 hideProfileButton
+                onLike={handleLike}
+                onUnlike={handleUnlike}
               />
             ))}
           </div>

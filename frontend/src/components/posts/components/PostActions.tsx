@@ -14,9 +14,11 @@ interface PostActionsProps {
 
 export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
   const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(post.likesCount);
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUser();
   const router = useRouter();
+
   useEffect(() => {
     const checkLikeStatus = async () => {
       try {
@@ -29,6 +31,11 @@ export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
 
     checkLikeStatus();
   }, [post.id]);
+
+  // Mettre à jour le compteur quand le post change
+  useEffect(() => {
+    setLikesCount(post.likesCount);
+  }, [post.likesCount]);
 
   const handleLike = async () => {
     if (!user) {
@@ -43,9 +50,11 @@ export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
       if (isLiked) {
         await onUnlike?.(post.id);
         setIsLiked(false);
+        setLikesCount((prev) => Math.max(0, prev - 1)); // Décrémenter localement
       } else {
         await onLike?.(post.id);
         setIsLiked(true);
+        setLikesCount((prev) => prev + 1); // Incrémenter localement
       }
     } finally {
       setIsLoading(false);
@@ -66,7 +75,7 @@ export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
           }`}
         >
           <Heart className={`h-4 w-4 ${isLiked ? "fill-current" : ""}`} />
-          <span>{post.likesCount}</span>
+          <span>{likesCount}</span>
         </Button>
 
         <Button
