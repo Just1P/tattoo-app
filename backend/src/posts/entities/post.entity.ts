@@ -4,10 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { Like } from './like.entity';
 
 @Entity('posts')
 export class Post {
@@ -61,6 +63,9 @@ export class Post {
 
   @Column()
   authorId: string;
+
+  @OneToMany(() => Like, (like) => like.post)
+  likes: Like[];
 
   @CreateDateColumn()
   createdAt: Date;

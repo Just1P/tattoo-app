@@ -42,7 +42,12 @@ export class PostsController {
       }),
       fileFilter: (req, file, cb) => {
         if (!file.mimetype.match(/\/(jpg|jpeg|png|gif|webp)$/)) {
-          return cb(new Error('Seules les images sont autorisées'), false);
+          return cb(
+            new Error(
+              'Seules les images sont autorisées (jpg, jpeg, png, gif, webp)',
+            ),
+            false,
+          );
         }
         cb(null, true);
       },
@@ -56,8 +61,9 @@ export class PostsController {
       throw new Error('Aucun fichier fourni');
     }
 
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:3001';
     return {
-      url: `http://localhost:3001/uploads/posts/${file.filename}`,
+      url: `${backendUrl}/uploads/posts/${file.filename}`,
     };
   }
 
@@ -118,12 +124,30 @@ export class PostsController {
   }
 
   @Post(':id/like')
-  likePost(@Param('id', ParseUUIDPipe) id: string) {
-    return this.postsService.likePost(id);
+  @UseGuards(JwtAuthGuard)
+  likePost(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Request() req: UserRequest,
+  ) {
+    return this.postsService.likePost(id, req.user.id);
   }
 
   @Post(':id/unlike')
-  unlikePost(@Param('id', ParseUUIDPipe) id: string) {
-    return this.postsService.unlikePost(id);
+  @UseGuards(JwtAuthGuard)
+  unlikePost(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Request() req: UserRequest,
+  ) {
+    return this.postsService.unlikePost(id, req.user.id);
+  }
+
+  @Get(':id/liked')
+  @UseGuards(JwtAuthGuard)
+  async hasLiked(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Request() req: UserRequest,
+  ) {
+    const hasLiked = await this.postsService.hasUserLikedPost(id, req.user.id);
+    return { hasLiked };
   }
 }

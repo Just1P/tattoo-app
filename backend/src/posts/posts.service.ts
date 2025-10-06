@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   ForbiddenException,
   Injectable,
   NotFoundException,
@@ -8,6 +9,7 @@ import { Repository } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { QueryPostsDto } from './dto/query-posts.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { Like } from './entities/like.entity';
 import { Post } from './entities/post.entity';
 
 @Injectable()
@@ -15,6 +17,8 @@ export class PostsService {
   constructor(
     @InjectRepository(Post)
     private postRepository: Repository<Post>,
+    @InjectRepository(Like)
+    private likeRepository: Repository<Like>,
   ) {}
 
   async create(createPostDto: CreatePostDto, authorId: string): Promise<Post> {
@@ -170,18 +174,56 @@ export class PostsService {
     await this.postRepository.remove(post);
   }
 
-  async likePost(id: string): Promise<Post> {
-    const post = await this.findOne(id);
+  async likePost(postId: string, userId: string): Promise<Post> {
+    const post = await this.findOne(postId);
+
+    // Vérifier si l'utilisateur a déjà liké ce post
+    const existingLike = await this.likeRepository.findOne({
+      where: { postId, userId },
+    });
+
+    if (existingLike) {
+      throw new ConflictException('Vous avez déjà liké ce post');
+    }
+
+    // Créer le like
+    const like = this.likeRepository.create({ postId, userId });
+    await this.likeRepository.save(like);
+
+    // Incrémenter le compteur
     post.likesCount += 1;
     return await this.postRepository.save(post);
   }
 
-  async unlikePost(id: string): Promise<Post> {
-    const post = await this.findOne(id);
+  async unlikePost(postId: string, userId: string): Promise<Post> {
+    const post = await this.findOne(postId);
+
+    // Trouver le like
+    const like = await this.likeRepository.findOne({
+      where: { postId, userId },
+    });
+
+    if (!like) {
+      throw new NotFoundException("Vous n'avez pas liké ce post");
+    }
+
+    // Supprimer le like
+    await this.likeRepository.remove(like);
+
+    // Décrémenter le compteur
     if (post.likesCount > 0) {
       post.likesCount -= 1;
+      return await this.postRepository.save(post);
     }
-    return await this.postRepository.save(post);
+
+    return post;
+  }
+
+  async hasUserLikedPost(postId: string, userId: string): Promise<boolean> {
+    const like = await this.likeRepository.findOne({
+      where: { postId, userId },
+    });
+    return !!like;
   }
 
   async getPopularPosts(limit: number = 10): Promise<Post[]> {
