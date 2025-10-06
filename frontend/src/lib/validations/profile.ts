@@ -50,9 +50,6 @@ export const profileSchema = z.object({
       (val) => !val || /^@?[a-zA-Z0-9._]{1,30}$/.test(val),
       "Format Instagram invalide"
     ),
-  userType: z.enum(["client", "artist"], {
-    message: "Veuillez sélectionner un type d'utilisateur",
-  }),
 });
 
 export type ProfileFormData = z.infer<typeof profileSchema>;

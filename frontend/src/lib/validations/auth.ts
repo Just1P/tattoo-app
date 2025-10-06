@@ -42,6 +42,7 @@ export const registerSchema = z
     confirmPassword: z
       .string()
       .min(1, "La confirmation du mot de passe est requise"),
+    userType: z.enum(["client", "artist"]).default("client"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Les mots de passe ne correspondent pas",

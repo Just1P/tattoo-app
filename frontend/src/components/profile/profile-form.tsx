@@ -26,7 +26,9 @@ export function ProfileForm({ user, onProfileUpdate }: ProfileFormProps) {
     setError(errorMessage);
   };
 
-  const handleSubmit = async (data: UpdateProfileData) => {
+  const handleSubmit = async (
+    data: Omit<UpdateProfileData, "userType" | "avatar">
+  ) => {
     try {
       setError(null);
 
@@ -35,13 +37,10 @@ export function ProfileForm({ user, onProfileUpdate }: ProfileFormProps) {
         avatarUrl = await uploadAvatar(avatarFile);
       }
 
-      const profileData = avatarUrl
-        ? {
-            ...data,
-            avatar: avatarUrl,
-            userType: data.userType || "client",
-          }
-        : { ...data, userType: data.userType || "client" };
+      const profileData: UpdateProfileData = {
+        ...data,
+        ...(avatarUrl && { avatar: avatarUrl }),
+      };
       await updateProfile(profileData);
       await onProfileUpdate();
     } catch (err) {
@@ -50,7 +49,7 @@ export function ProfileForm({ user, onProfileUpdate }: ProfileFormProps) {
   };
 
   const handleCancel = () => {
-    router.push("/dashboard");
+    router.push("/gallery");
   };
 
   return (

@@ -8,7 +8,7 @@ export const ROUTES = {
   REGISTER: "/register",
   PROFILE: "/profile",
   PROFILE_EDIT: "/profile/edit",
-  DASHBOARD: "/dashboard",
+  GALLERY: "/gallery",
 } as const;
 
 export const USER_TYPES = {

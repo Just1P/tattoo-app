@@ -1,4 +1,5 @@
 import {
+  Column,
   CreateDateColumn,
   Entity,
   Index,
@@ -26,9 +27,11 @@ export class Like {
   @JoinColumn({ name: 'postId' })
   post: Post;
 
+  @Column()
   @Index()
   userId: string;
 
+  @Column()
   @Index()
   postId: string;
 

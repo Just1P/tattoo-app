@@ -25,6 +25,7 @@ export interface UpdateProfileData {
   website?: string;
   instagram?: string;
   userType?: "client" | "artist";
+  avatar?: string;
 }
 
 class ProfileApi {

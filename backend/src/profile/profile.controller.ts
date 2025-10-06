@@ -3,6 +3,8 @@ import {
   Body,
   Controller,
   Get,
+  Param,
+  ParseUUIDPipe,
   Post,
   Put,
   Request,
@@ -15,20 +17,33 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import type { UserRequest } from '../auth/interfaces';
+import { User } from '../users/entities/user.entity';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfileService } from './profile.service';
 
 @Controller('profile')
-@UseGuards(JwtAuthGuard)
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   async getProfile(@Request() req: UserRequest) {
     return this.profileService.getProfile(req.user.id);
   }
 
+  // Endpoint public pour voir le profil d'un utilisateur
+  @Get('public/:userId')
+  async getPublicProfile(
+    @Param('userId', ParseUUIDPipe) userId: string,
+  ): Promise<User> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+    const user = await this.profileService.getPublicProfile(userId);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return user;
+  }
+
   @Put()
+  @UseGuards(JwtAuthGuard)
   async updateProfile(
     @Request() req: UserRequest,
     @Body() updateProfileDto: UpdateProfileDto,
@@ -37,6 +52,7 @@ export class ProfileController {
   }
 
   @Post('avatar')
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(
     FileInterceptor('avatar', {
       storage: diskStorage({
@@ -58,7 +74,7 @@ export class ProfileController {
         cb(null, true);
       },
       limits: {
-        fileSize: 5 * 1024 * 1024, // 5MB
+        fileSize: 5 * 1024 * 1024,
       },
     }),
   )

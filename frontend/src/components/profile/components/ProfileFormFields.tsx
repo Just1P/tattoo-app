@@ -15,13 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import type { ProfileData } from "@/lib/api/profile";
 import { profileSchema, type ProfileFormData } from "@/lib/validations/profile";
@@ -51,34 +44,26 @@ export function ProfileFormFields({
       location: user?.location || "",
       website: user?.website || "",
       instagram: user?.instagram || "",
-      userType: user?.userType || "client",
     },
   });
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="userType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Type d&apos;utilisateur *</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionnez votre type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="client">Client</SelectItem>
-                  <SelectItem value="artist">Artiste</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {/* Type d'utilisateur - Lecture seule */}
+        {user?.userType && (
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+            <div className="text-sm font-medium text-gray-700 mb-1">
+              Type de compte
+            </div>
+            <div className="text-base capitalize font-semibold text-gray-900">
+              {user.userType === "artist" ? "Artiste" : "Client"}
+            </div>
+            <p className="text-xs text-gray-500 mt-1">
+              Le type de compte ne peut pas être modifié
+            </p>
+          </div>
+        )}
 
         <div className="grid grid-cols-2 gap-4">
           <FormField

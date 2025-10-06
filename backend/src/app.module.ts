@@ -17,21 +17,18 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    // Configuration avec validation
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
       validate,
       envFilePath: ['.env', '.env.local'],
     }),
-    // Rate limiting
     ThrottlerModule.forRoot([
       {
-        ttl: 60000, // 1 minute
-        limit: 100, // 100 requêtes max par minute
+        ttl: 60000,
+        limit: 100,
       },
     ]),
-    // Base de données
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -42,7 +39,7 @@ import { UsersModule } from './users/users.module';
         password: configService.get('database.password'),
         database: configService.get('database.name'),
         entities: [User, Post, Like],
-        synchronize: false, // TOUJOURS false - utiliser les migrations
+        synchronize: false,
         logging: configService.get('nodeEnv') === 'development',
       }),
       inject: [ConfigService],

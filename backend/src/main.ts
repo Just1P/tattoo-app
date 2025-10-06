@@ -14,17 +14,14 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
 
-  // Sécurité HTTP Headers avec Helmet
   app.use(
     helmet({
-      crossOriginResourcePolicy: { policy: 'cross-origin' }, // Pour les uploads
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
     }),
   );
 
-  // Global Exception Filter
   app.useGlobalFilters(new GlobalExceptionFilter());
 
-  // Validation globale avec transformation
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -36,7 +33,6 @@ async function bootstrap() {
     }),
   );
 
-  // Serializer pour exclure les champs sensibles (password)
   app.useGlobalInterceptors(
     new ClassSerializerInterceptor(app.get(Reflector), {
       excludeExtraneousValues: false,
@@ -44,12 +40,10 @@ async function bootstrap() {
     }),
   );
 
-  // Fichiers statiques pour les uploads
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
   });
 
-  // CORS configuré via variables d'environnement
   const allowedOrigins =
     configService.get<string[]>('cors.allowedOrigins') || [];
   app.enableCors({
@@ -57,21 +51,24 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     credentials: true,
-    maxAge: 3600, // Cache preflight requests
+    maxAge: 3600,
   });
 
-  // Graceful shutdown
   app.enableShutdownHooks();
 
   const port = configService.get<number>('port') || 3001;
   await app.listen(port);
 
+  const backendUrl =
+    configService.get<string>('urls.backend') || `http://localhost:${port}`;
+  const nodeEnv = configService.get<string>('nodeEnv') || 'development';
+
   console.log(`
 ╔═══════════════════════════════════════════╗
 ║  🚀 Application démarrée avec succès      ║
 ║                                           ║
-║  📍 URL: ${configService.get('urls.backend').padEnd(29)} ║
-║  🌍 Environnement: ${configService.get('nodeEnv').padEnd(19)} ║
+║  📍 URL: ${backendUrl.padEnd(29)} ║
+║  🌍 Environnement: ${nodeEnv.padEnd(19)} ║
 ║  🔒 Sécurité: Activée                     ║
 ╚═══════════════════════════════════════════╝
   `);

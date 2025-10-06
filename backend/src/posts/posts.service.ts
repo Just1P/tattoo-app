@@ -177,7 +177,6 @@ export class PostsService {
   async likePost(postId: string, userId: string): Promise<Post> {
     const post = await this.findOne(postId);
 
-    // Vérifier si l'utilisateur a déjà liké ce post
     const existingLike = await this.likeRepository.findOne({
       where: { postId, userId },
     });
@@ -186,11 +185,9 @@ export class PostsService {
       throw new ConflictException('Vous avez déjà liké ce post');
     }
 
-    // Créer le like
     const like = this.likeRepository.create({ postId, userId });
     await this.likeRepository.save(like);
 
-    // Incrémenter le compteur
     post.likesCount += 1;
     return await this.postRepository.save(post);
   }
@@ -198,7 +195,6 @@ export class PostsService {
   async unlikePost(postId: string, userId: string): Promise<Post> {
     const post = await this.findOne(postId);
 
-    // Trouver le like
     const like = await this.likeRepository.findOne({
       where: { postId, userId },
     });
@@ -206,11 +202,8 @@ export class PostsService {
     if (!like) {
       throw new NotFoundException("Vous n'avez pas liké ce post");
     }
-
-    // Supprimer le like
     await this.likeRepository.remove(like);
 
-    // Décrémenter le compteur
     if (post.likesCount > 0) {
       post.likesCount -= 1;
       return await this.postRepository.save(post);

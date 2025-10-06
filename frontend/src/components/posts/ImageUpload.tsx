@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { postsApi } from "@/lib/api/posts";
 import { cn } from "@/lib/utils";
 import { IconPhoto, IconTrash } from "@tabler/icons-react";
+import Image from "next/image";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
@@ -32,7 +33,6 @@ export function ImageUpload({
 
       setIsUploading(true);
       try {
-        // Upload réel des images
         const uploadPromises = acceptedFiles.map((file) =>
           postsApi.uploadImage(file)
         );
@@ -91,7 +91,7 @@ export function ImageUpload({
             {isDragActive ? (
               <p>Déposez vos images ici...</p>
             ) : images.length >= maxImages ? (
-              <p>Nombre maximum d'images atteint</p>
+              <p>Nombre maximum d&apos;images atteint</p>
             ) : (
               <div>
                 <p className="font-medium">
@@ -101,7 +101,7 @@ export function ImageUpload({
                   </span>
                 </p>
                 <p className="text-xs text-gray-500 mt-1">
-                  PNG, JPG, GIF jusqu'à 10MB
+                  PNG, JPG, GIF jusqu&apos;à 10MB
                 </p>
               </div>
             )}
@@ -117,10 +117,12 @@ export function ImageUpload({
               key={index}
               className="relative group aspect-square rounded-lg overflow-hidden border border-gray-200"
             >
-              <img
+              <Image
                 src={image}
                 alt={`Preview ${index + 1}`}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                unoptimized
               />
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <Button

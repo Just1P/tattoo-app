@@ -37,6 +37,7 @@ export class AuthService {
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
+        userType: user.userType,
       },
     };
   }
@@ -66,6 +67,7 @@ export class AuthService {
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
+        userType: user.userType,
       },
     };
   }

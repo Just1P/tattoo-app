@@ -10,13 +10,15 @@ import { useProfile } from "@/hooks/useProfile";
 import { getInitials } from "@/lib/utils/image";
 import { IconEdit, IconPlus } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function ProfilePage() {
   const router = useRouter();
   const { profile, isLoading, error } = useProfile();
-  const { posts, isLoading: postsLoading } = useMyPosts();
+  const { posts, isLoading: postsLoading, refetchMyPosts } = useMyPosts();
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [activeTab, setActiveTab] = useState("about");
+  const firstPostRef = useRef<HTMLDivElement>(null);
 
   if (isLoading) {
     return (
@@ -119,11 +121,23 @@ export default function ProfilePage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <Tabs defaultValue="about" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="about">À propos</TabsTrigger>
-            <TabsTrigger value="posts">Mes posts</TabsTrigger>
-          </TabsList>
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="space-y-6"
+        >
+          {profile.userType === "artist" ? (
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="about">À propos</TabsTrigger>
+              <TabsTrigger value="posts">Mes posts</TabsTrigger>
+            </TabsList>
+          ) : (
+            <TabsList className="w-full">
+              <TabsTrigger value="about" className="flex-1">
+                À propos
+              </TabsTrigger>
+            </TabsList>
+          )}
 
           <TabsContent value="about">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
@@ -161,9 +175,9 @@ export default function ProfilePage() {
             </div>
           </TabsContent>
 
-          <TabsContent value="posts">
-            <div className="space-y-6">
-              {profile.userType === "artist" && (
+          {profile.userType === "artist" && (
+            <TabsContent value="posts">
+              <div className="space-y-6">
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-xl font-semibold text-gray-900">
@@ -180,49 +194,59 @@ export default function ProfilePage() {
                   {showCreateForm && (
                     <div className="border-t pt-6">
                       <CreatePostForm
-                        onSuccess={() => {
+                        onSuccess={async () => {
                           setShowCreateForm(false);
+                          setActiveTab("posts"); // Changer vers l'onglet posts
+                          await refetchMyPosts(); // Rafraîchir la liste des posts
+
+                          // Scroller vers le premier post (le dernier créé) après un court délai
+                          setTimeout(() => {
+                            firstPostRef.current?.scrollIntoView({
+                              behavior: "smooth",
+                              block: "center",
+                            });
+                          }, 100);
                         }}
                         onCancel={() => setShowCreateForm(false)}
                       />
                     </div>
                   )}
                 </div>
-              )}
 
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  {profile.userType === "artist"
-                    ? "Mes posts"
-                    : "Posts récents"}
-                </h2>
+                <div className="space-y-4">
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    Mes posts
+                  </h2>
 
-                {postsLoading ? (
-                  <div className="flex justify-center py-8">
-                    <LoadingSpinner size="lg" />
-                  </div>
-                ) : posts.length === 0 ? (
-                  <div className="text-center py-8">
-                    <p className="text-gray-500">
-                      {profile.userType === "artist"
-                        ? "Vous n'avez pas encore créé de posts."
-                        : "Aucun post disponible."}
-                    </p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {posts.map((post) => (
-                      <PostCard
-                        key={post.id}
-                        post={post}
-                        showActions={profile.userType === "artist"}
-                      />
-                    ))}
-                  </div>
-                )}
+                  {postsLoading ? (
+                    <div className="flex justify-center py-8">
+                      <LoadingSpinner size="lg" />
+                    </div>
+                  ) : posts.length === 0 ? (
+                    <div className="text-center py-8">
+                      <p className="text-gray-500">
+                        Vous n&apos;avez pas encore créé de posts.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {posts.map((post, index) => (
+                        <div
+                          key={post.id}
+                          ref={index === 0 ? firstPostRef : null}
+                        >
+                          <PostCard
+                            post={post}
+                            showActions={profile.userType === "artist"}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          </TabsContent>
+            </TabsContent>
+          )}
         </Tabs>
       </div>
     </div>

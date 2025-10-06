@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { postsApi } from "@/lib/api/posts";
+import { useUser } from "@/lib/contexts/UserContext";
 import { Post } from "@/lib/types/posts";
 import { Heart, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface PostActionsProps {
   post: Post;
@@ -11,14 +14,41 @@ interface PostActionsProps {
 
 export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
   const [isLiked, setIsLiked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    const checkLikeStatus = async () => {
+      try {
+        const liked = await postsApi.hasLiked(post.id);
+        setIsLiked(liked);
+      } catch {
+        setIsLiked(false);
+      }
+    };
 
-  const handleLike = () => {
-    if (isLiked) {
-      onUnlike?.(post.id);
-      setIsLiked(false);
-    } else {
-      onLike?.(post.id);
-      setIsLiked(true);
+    checkLikeStatus();
+  }, [post.id]);
+
+  const handleLike = async () => {
+    if (!user) {
+      router.push("/auth");
+      return;
+    }
+
+    if (isLoading) return;
+
+    setIsLoading(true);
+    try {
+      if (isLiked) {
+        await onUnlike?.(post.id);
+        setIsLiked(false);
+      } else {
+        await onLike?.(post.id);
+        setIsLiked(true);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -29,6 +59,8 @@ export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
           variant="ghost"
           size="sm"
           onClick={handleLike}
+          disabled={isLoading}
+          title={!user ? "Connectez-vous pour liker" : undefined}
           className={`flex items-center space-x-1 ${
             isLiked ? "text-red-500" : "text-gray-500"
           }`}
@@ -36,6 +68,7 @@ export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
           <Heart className={`h-4 w-4 ${isLiked ? "fill-current" : ""}`} />
           <span>{post.likesCount}</span>
         </Button>
+
         <Button
           variant="ghost"
           size="sm"

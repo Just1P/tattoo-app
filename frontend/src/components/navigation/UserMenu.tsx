@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { IconLayoutDashboard, IconLogout, IconUser } from "@tabler/icons-react";
+import { IconLogout, IconPhoto, IconUser } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/hooks/useAuth";
@@ -50,9 +50,9 @@ export function UserMenu() {
           <IconUser className="mr-2 h-4 w-4" />
           <span>Profil</span>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/dashboard")}>
-          <IconLayoutDashboard className="mr-2 h-4 w-4" />
-          <span>Dashboard</span>
+        <DropdownMenuItem onClick={() => router.push("/gallery")}>
+          <IconPhoto className="mr-2 h-4 w-4" />
+          <span>Galerie</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={logout}>

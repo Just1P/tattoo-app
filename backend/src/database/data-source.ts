@@ -1,11 +1,12 @@
-import * as dotenv from 'dotenv';
+import { config } from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { Like } from '../posts/entities/like.entity';
 import { Post } from '../posts/entities/post.entity';
 import { User } from '../users/entities/user.entity';
 
-// Charger les variables d'environnement
-dotenv.config();
+// Load environment variables
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+config();
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',

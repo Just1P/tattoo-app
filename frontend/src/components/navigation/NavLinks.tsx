@@ -11,8 +11,8 @@ export function NavLinks() {
       <Button variant="ghost" onClick={() => router.push("/")}>
         Accueil
       </Button>
-      <Button variant="ghost" onClick={() => router.push("/dashboard")}>
-        Dashboard
+      <Button variant="ghost" onClick={() => router.push("/gallery")}>
+        Galerie
       </Button>
       <Button variant="ghost" onClick={() => router.push("/profile")}>
         Profil

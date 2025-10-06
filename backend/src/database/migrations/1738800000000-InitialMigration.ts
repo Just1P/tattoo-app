@@ -4,10 +4,8 @@ export class InitialMigration1738800000000 implements MigrationInterface {
   name = 'InitialMigration1738800000000';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    // Créer l'extension UUID si elle n'existe pas
     await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
 
-    // Créer la table users
     await queryRunner.query(`
       CREATE TABLE "users" (
         "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
@@ -30,7 +28,6 @@ export class InitialMigration1738800000000 implements MigrationInterface {
       )
     `);
 
-    // Créer la table posts
     await queryRunner.query(`
       CREATE TABLE "posts" (
         "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
@@ -52,7 +49,6 @@ export class InitialMigration1738800000000 implements MigrationInterface {
       )
     `);
 
-    // Créer la table likes
     await queryRunner.query(`
       CREATE TABLE "likes" (
         "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
@@ -63,9 +59,14 @@ export class InitialMigration1738800000000 implements MigrationInterface {
       )
     `);
 
-    // Créer les index
     await queryRunner.query(
       `CREATE INDEX "IDX_user_email" ON "users" ("email")`,
+    );
+    await queryRunner.query(
+      `CREATE INDEX "IDX_user_userType" ON "users" ("userType")`,
+    );
+    await queryRunner.query(
+      `CREATE INDEX "IDX_user_isActive" ON "users" ("isActive")`,
     );
     await queryRunner.query(
       `CREATE INDEX "IDX_post_authorId" ON "posts" ("authorId")`,
@@ -80,6 +81,15 @@ export class InitialMigration1738800000000 implements MigrationInterface {
       `CREATE INDEX "IDX_post_isPublic" ON "posts" ("isPublic")`,
     );
     await queryRunner.query(
+      `CREATE INDEX "IDX_post_createdAt" ON "posts" ("createdAt" DESC)`,
+    );
+    await queryRunner.query(
+      `CREATE INDEX "IDX_post_likesCount" ON "posts" ("likesCount" DESC)`,
+    );
+    await queryRunner.query(
+      `CREATE INDEX "IDX_post_category_status" ON "posts" ("category", "status")`,
+    );
+    await queryRunner.query(
       `CREATE INDEX "IDX_like_userId" ON "likes" ("userId")`,
     );
     await queryRunner.query(
@@ -88,8 +98,10 @@ export class InitialMigration1738800000000 implements MigrationInterface {
     await queryRunner.query(
       `CREATE UNIQUE INDEX "IDX_like_userId_postId" ON "likes" ("userId", "postId")`,
     );
+    await queryRunner.query(
+      `CREATE INDEX "IDX_like_createdAt" ON "likes" ("createdAt" DESC)`,
+    );
 
-    // Créer les clés étrangères
     await queryRunner.query(`
       ALTER TABLE "posts"
       ADD CONSTRAINT "FK_post_author"
@@ -117,7 +129,6 @@ export class InitialMigration1738800000000 implements MigrationInterface {
       ON UPDATE NO ACTION
     `);
 
-    // Ajouter des contraintes CHECK
     await queryRunner.query(`
       ALTER TABLE "users"
       ADD CONSTRAINT "CHK_userType"
@@ -138,7 +149,6 @@ export class InitialMigration1738800000000 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    // Supprimer les clés étrangères
     await queryRunner.query(
       `ALTER TABLE "likes" DROP CONSTRAINT "FK_like_post"`,
     );
@@ -149,7 +159,6 @@ export class InitialMigration1738800000000 implements MigrationInterface {
       `ALTER TABLE "posts" DROP CONSTRAINT "FK_post_author"`,
     );
 
-    // Supprimer les contraintes CHECK
     await queryRunner.query(`ALTER TABLE "posts" DROP CONSTRAINT "CHK_status"`);
     await queryRunner.query(
       `ALTER TABLE "posts" DROP CONSTRAINT "CHK_category"`,
@@ -158,17 +167,21 @@ export class InitialMigration1738800000000 implements MigrationInterface {
       `ALTER TABLE "users" DROP CONSTRAINT "CHK_userType"`,
     );
 
-    // Supprimer les index
+    await queryRunner.query(`DROP INDEX "IDX_like_createdAt"`);
     await queryRunner.query(`DROP INDEX "IDX_like_userId_postId"`);
     await queryRunner.query(`DROP INDEX "IDX_like_postId"`);
     await queryRunner.query(`DROP INDEX "IDX_like_userId"`);
+    await queryRunner.query(`DROP INDEX "IDX_post_category_status"`);
+    await queryRunner.query(`DROP INDEX "IDX_post_likesCount"`);
+    await queryRunner.query(`DROP INDEX "IDX_post_createdAt"`);
     await queryRunner.query(`DROP INDEX "IDX_post_isPublic"`);
     await queryRunner.query(`DROP INDEX "IDX_post_status"`);
     await queryRunner.query(`DROP INDEX "IDX_post_category"`);
     await queryRunner.query(`DROP INDEX "IDX_post_authorId"`);
+    await queryRunner.query(`DROP INDEX "IDX_user_isActive"`);
+    await queryRunner.query(`DROP INDEX "IDX_user_userType"`);
     await queryRunner.query(`DROP INDEX "IDX_user_email"`);
 
-    // Supprimer les tables
     await queryRunner.query(`DROP TABLE "likes"`);
     await queryRunner.query(`DROP TABLE "posts"`);
     await queryRunner.query(`DROP TABLE "users"`);

@@ -24,7 +24,6 @@ class EnvironmentVariables {
   @Max(65535)
   PORT: number = 3001;
 
-  // Database
   @IsString()
   DB_HOST: string;
 
@@ -42,18 +41,15 @@ class EnvironmentVariables {
   @IsString()
   DB_NAME: string;
 
-  // JWT
   @IsString()
   JWT_SECRET: string;
 
-  // URLs
   @IsUrl({ require_tld: false })
   FRONTEND_URL: string;
 
   @IsUrl({ require_tld: false })
   BACKEND_URL: string;
 
-  // CORS
   @IsString()
   ALLOWED_ORIGINS: string;
 }

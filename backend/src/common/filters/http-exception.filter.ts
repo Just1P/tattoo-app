@@ -8,6 +8,22 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
+interface HttpExceptionResponse {
+  message?: string | string[];
+  error?: string;
+  statusCode?: number;
+}
+
+interface ErrorResponse {
+  statusCode: number;
+  timestamp: string;
+  path: string;
+  method: string;
+  error: string;
+  message: string | string[];
+  stack?: string;
+}
+
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(GlobalExceptionFilter.name);
@@ -28,7 +44,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       if (typeof exceptionResponse === 'string') {
         message = exceptionResponse;
       } else if (typeof exceptionResponse === 'object') {
-        const responseObj = exceptionResponse as any;
+        const responseObj = exceptionResponse as HttpExceptionResponse;
         message = responseObj.message || message;
         error = responseObj.error || error;
       }
@@ -37,20 +53,19 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       error = exception.name;
     }
 
-    // Log l'erreur pour debug (mais pas en production pour éviter de logger des données sensibles)
     if (process.env.NODE_ENV !== 'production') {
       this.logger.error(
         `${request.method} ${request.url}`,
         exception instanceof Error ? exception.stack : exception,
       );
     } else {
+      const messageStr = Array.isArray(message) ? message.join(', ') : message;
       this.logger.error(
-        `${request.method} ${request.url} - ${error}: ${message}`,
+        `${request.method} ${request.url} - ${error}: ${messageStr}`,
       );
     }
 
-    // Ne jamais exposer les stack traces en production
-    const responseBody: any = {
+    const responseBody: ErrorResponse = {
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,
@@ -59,7 +74,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       message,
     };
 
-    // Ajouter la stack seulement en développement
     if (process.env.NODE_ENV === 'development' && exception instanceof Error) {
       responseBody.stack = exception.stack;
     }

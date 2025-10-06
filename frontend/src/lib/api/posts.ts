@@ -180,6 +180,7 @@ export const postsApi = {
   async like(id: string): Promise<Post> {
     const response = await fetch(`${API_BASE_URL}/posts/${id}/like`, {
       method: "POST",
+      headers: getAuthHeaders(),
     });
 
     if (!response.ok) {
@@ -193,6 +194,7 @@ export const postsApi = {
   async unlike(id: string): Promise<Post> {
     const response = await fetch(`${API_BASE_URL}/posts/${id}/unlike`, {
       method: "POST",
+      headers: getAuthHeaders(),
     });
 
     if (!response.ok) {
@@ -201,6 +203,19 @@ export const postsApi = {
     }
 
     return response.json();
+  },
+
+  async hasLiked(id: string): Promise<boolean> {
+    const response = await fetch(`${API_BASE_URL}/posts/${id}/liked`, {
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      return false;
+    }
+
+    const data = await response.json();
+    return data.hasLiked;
   },
 
   async getPopular(limit?: number): Promise<Post[]> {

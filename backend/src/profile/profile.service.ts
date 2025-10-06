@@ -38,6 +38,31 @@ export class ProfileService {
     return user;
   }
 
+  async getPublicProfile(userId: string) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      select: [
+        'id',
+        'firstName',
+        'lastName',
+        'bio',
+        'location',
+        'website',
+        'instagram',
+        'userType',
+        'avatar',
+        'createdAt',
+      ],
+    });
+
+    if (!user) {
+      throw new NotFoundException('Utilisateur non trouvé');
+    }
+
+    // Ne pas exposer l'email et le téléphone dans le profil public
+    return user;
+  }
+
   async updateProfile(userId: string, updateProfileDto: UpdateProfileDto) {
     const user = await this.userRepository.findOne({
       where: { id: userId },

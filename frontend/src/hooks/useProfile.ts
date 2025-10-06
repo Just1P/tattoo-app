@@ -42,7 +42,7 @@ export function useProfile() {
         setError(null);
         await profileApi.updateProfile(data);
         await refreshUser();
-        router.push("/dashboard");
+        router.push("/gallery");
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "Erreur lors de la mise à jour"

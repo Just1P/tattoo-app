@@ -1,15 +1,18 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Palette, User } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { ErrorMessage } from "@/components/common/ErrorMessage";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { PasswordInput } from "@/components/common/PasswordInput";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -35,12 +38,84 @@ export function RegisterForm({
       email: "",
       password: "",
       confirmPassword: "",
+      userType: "client",
     },
   });
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="userType"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Type de compte</FormLabel>
+              <FormControl>
+                <div className="grid grid-cols-2 gap-3">
+                  <Card
+                    className={`p-4 cursor-pointer transition-all hover:border-primary ${
+                      field.value === "client"
+                        ? "border-primary bg-primary/5"
+                        : "border-gray-200"
+                    }`}
+                    onClick={() => {
+                      if (!isLoading) field.onChange("client");
+                    }}
+                  >
+                    <div className="flex flex-col items-center text-center space-y-2">
+                      <User
+                        className={`h-8 w-8 ${
+                          field.value === "client"
+                            ? "text-primary"
+                            : "text-gray-500"
+                        }`}
+                      />
+                      <div>
+                        <p className="font-semibold">Client</p>
+                        <p className="text-xs text-gray-500">
+                          Je cherche un tatoueur
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+
+                  <Card
+                    className={`p-4 cursor-pointer transition-all hover:border-primary ${
+                      field.value === "artist"
+                        ? "border-primary bg-primary/5"
+                        : "border-gray-200"
+                    }`}
+                    onClick={() => {
+                      if (!isLoading) field.onChange("artist");
+                    }}
+                  >
+                    <div className="flex flex-col items-center text-center space-y-2">
+                      <Palette
+                        className={`h-8 w-8 ${
+                          field.value === "artist"
+                            ? "text-primary"
+                            : "text-gray-500"
+                        }`}
+                      />
+                      <div>
+                        <p className="font-semibold">Artiste</p>
+                        <p className="text-xs text-gray-500">
+                          Je suis tatoueur
+                        </p>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              </FormControl>
+              <FormDescription>
+                Sélectionnez le type de compte qui vous correspond
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
