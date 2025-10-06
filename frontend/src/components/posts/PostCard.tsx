@@ -16,6 +16,7 @@ interface PostCardProps {
   onLike?: (postId: string) => void;
   onUnlike?: (postId: string) => void;
   showActions?: boolean;
+  hideProfileButton?: boolean;
 }
 
 export function PostCard({
@@ -23,11 +24,12 @@ export function PostCard({
   onLike,
   onUnlike,
   showActions = true,
+  hideProfileButton = false,
 }: PostCardProps) {
   return (
     <Card className="w-full">
       <CardHeader className="pb-3">
-        <PostHeader post={post} />
+        <PostHeader post={post} hideProfileButton={hideProfileButton} />
       </CardHeader>
 
       <CardContent className="space-y-4">

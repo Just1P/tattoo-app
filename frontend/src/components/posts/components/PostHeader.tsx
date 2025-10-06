@@ -16,9 +16,13 @@ import { useRouter } from "next/navigation";
 
 interface PostHeaderProps {
   post: Post;
+  hideProfileButton?: boolean;
 }
 
-export function PostHeader({ post }: PostHeaderProps) {
+export function PostHeader({
+  post,
+  hideProfileButton = false,
+}: PostHeaderProps) {
   const router = useRouter();
 
   const handleViewProfile = () => {
@@ -61,7 +65,7 @@ export function PostHeader({ post }: PostHeaderProps) {
             {formatPostDate(post.createdAt)}
           </p>
         </div>
-        {post.author.userType === "artist" && (
+        {post.author.userType === "artist" && !hideProfileButton && (
           <Button
             variant="outline"
             size="sm"

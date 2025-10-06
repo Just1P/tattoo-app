@@ -238,6 +238,7 @@ export default function ProfilePage() {
                           <PostCard
                             post={post}
                             showActions={profile.userType === "artist"}
+                            hideProfileButton
                           />
                         </div>
                       ))}
