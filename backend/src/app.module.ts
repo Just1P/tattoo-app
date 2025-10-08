@@ -14,6 +14,7 @@ import { PostsModule } from './posts/posts.module';
 import { ProfileModule } from './profile/profile.module';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { WebsocketModule } from './websocket/websocket.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     ProfileModule,
     PostsModule,
+    WebsocketModule,
   ],
   controllers: [AppController],
   providers: [

@@ -24,7 +24,6 @@ export function PostImages({ images }: PostImagesProps) {
     setImageErrors((prev) => new Set(prev).add(index));
   };
 
-  // Si une seule image, affichage simple
   if (images.length === 1) {
     return (
       <div className="relative w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
@@ -45,8 +44,6 @@ export function PostImages({ images }: PostImagesProps) {
       </div>
     );
   }
-
-  // Si plusieurs images, utiliser le carousel
   return (
     <Carousel className="w-full">
       <CarouselContent>

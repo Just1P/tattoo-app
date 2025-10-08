@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { WebsocketGateway } from '../websocket/websocket.gateway';
 import { CreatePostDto } from './dto/create-post.dto';
 import { QueryPostsDto } from './dto/query-posts.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -19,6 +20,7 @@ export class PostsService {
     private postRepository: Repository<Post>,
     @InjectRepository(Like)
     private likeRepository: Repository<Like>,
+    private websocketGateway: WebsocketGateway,
   ) {}
 
   async create(createPostDto: CreatePostDto, authorId: string): Promise<Post> {
@@ -27,7 +29,15 @@ export class PostsService {
       authorId,
     });
 
-    return await this.postRepository.save(post);
+    const savedPost = await this.postRepository.save(post);
+
+    const postWithAuthor = await this.findOne(savedPost.id);
+
+    this.websocketGateway.emitPostCreated(
+      postWithAuthor as unknown as { id: string; [key: string]: unknown },
+    );
+
+    return savedPost;
   }
 
   async findAll(queryDto: QueryPostsDto) {
@@ -161,7 +171,13 @@ export class PostsService {
     }
 
     Object.assign(post, updatePostDto);
-    return await this.postRepository.save(post);
+    const updatedPost = await this.postRepository.save(post);
+
+    this.websocketGateway.emitPostUpdated(
+      updatedPost as unknown as { id: string; [key: string]: unknown },
+    );
+
+    return updatedPost;
   }
 
   async remove(id: string, userId: string): Promise<void> {
@@ -172,6 +188,8 @@ export class PostsService {
     }
 
     await this.postRepository.remove(post);
+
+    this.websocketGateway.emitPostDeleted(id);
   }
 
   async likePost(postId: string, userId: string): Promise<Post> {
@@ -189,7 +207,11 @@ export class PostsService {
     await this.likeRepository.save(like);
 
     post.likesCount += 1;
-    return await this.postRepository.save(post);
+    const updatedPost = await this.postRepository.save(post);
+
+    this.websocketGateway.emitPostLiked(postId, userId, updatedPost.likesCount);
+
+    return updatedPost;
   }
 
   async unlikePost(postId: string, userId: string): Promise<Post> {
@@ -206,10 +228,17 @@ export class PostsService {
 
     if (post.likesCount > 0) {
       post.likesCount -= 1;
-      return await this.postRepository.save(post);
     }
 
-    return post;
+    const updatedPost = await this.postRepository.save(post);
+
+    this.websocketGateway.emitPostUnliked(
+      postId,
+      userId,
+      updatedPost.likesCount,
+    );
+
+    return updatedPost;
   }
 
   async hasUserLikedPost(postId: string, userId: string): Promise<boolean> {

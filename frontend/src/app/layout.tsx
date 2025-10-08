@@ -1,5 +1,7 @@
+import { WebSocketIndicator } from "@/components/common/WebSocketIndicator";
 import Navigation from "@/components/navigation";
 import { UserProvider } from "@/lib/contexts/UserContext";
+import { WebSocketProvider } from "@/lib/contexts/WebSocketContext";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -30,8 +32,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <UserProvider>
-          <Navigation />
-          {children}
+          <WebSocketProvider>
+            <Navigation />
+            {children}
+            <WebSocketIndicator />
+          </WebSocketProvider>
         </UserProvider>
       </body>
     </html>

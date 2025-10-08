@@ -6,7 +6,8 @@ import {
   UpdatePostData,
 } from "@/lib/types/posts";
 import { createErrorHandler } from "@/lib/utils/postUtils";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useWebSocketPosts } from "./useWebSocketPosts";
 
 interface PaginationState {
   total: number;
@@ -40,6 +41,8 @@ export const useBasePosts = ({
     limit: 10,
     totalPages: 0,
   });
+
+  const pendingActions = useRef<Set<string>>(new Set());
 
   const handleError = useCallback((err: unknown, message: string) => {
     createErrorHandler(setError)(err, message);
@@ -111,10 +114,18 @@ export const useBasePosts = ({
 
   const likePost = async (id: string) => {
     try {
+      const actionKey = `like-${id}`;
+      pendingActions.current.add(actionKey);
+
       const updatedPost = await postsApi.like(id);
       setPosts((prev) =>
         prev.map((post) => (post.id === id ? updatedPost : post))
       );
+
+      setTimeout(() => {
+        pendingActions.current.delete(actionKey);
+      }, 1000);
+
       return updatedPost;
     } catch (err) {
       handleError(err, "Erreur lors du like");
@@ -123,10 +134,18 @@ export const useBasePosts = ({
 
   const unlikePost = async (id: string) => {
     try {
+      const actionKey = `unlike-${id}`;
+      pendingActions.current.add(actionKey);
+
       const updatedPost = await postsApi.unlike(id);
       setPosts((prev) =>
         prev.map((post) => (post.id === id ? updatedPost : post))
       );
+
+      setTimeout(() => {
+        pendingActions.current.delete(actionKey);
+      }, 1000);
+
       return updatedPost;
     } catch (err) {
       handleError(err, "Erreur lors du unlike");
@@ -137,6 +156,53 @@ export const useBasePosts = ({
     setHasFetched(false);
     fetchPosts();
   }, [fetchPosts]);
+
+  useWebSocketPosts(
+    (data) => {
+      if (pendingActions.current.has(`like-${data.postId}`)) {
+        console.log("🔕 Ignoré (action locale):", data.postId);
+        return;
+      }
+
+      setPosts((prev) =>
+        prev.map((post) =>
+          post.id === data.postId
+            ? { ...post, likesCount: data.likesCount }
+            : post
+        )
+      );
+    },
+    (data) => {
+      if (pendingActions.current.has(`unlike-${data.postId}`)) {
+        console.log("🔕 Ignoré (action locale):", data.postId);
+        return;
+      }
+
+      setPosts((prev) =>
+        prev.map((post) =>
+          post.id === data.postId
+            ? { ...post, likesCount: data.likesCount }
+            : post
+        )
+      );
+    },
+    (data) => {
+      setPosts((prev) => {
+        if (prev.some((p) => p.id === data.post.id)) {
+          return prev;
+        }
+        return [data.post, ...prev];
+      });
+    },
+    (data) => {
+      setPosts((prev) =>
+        prev.map((post) => (post.id === data.post.id ? data.post : post))
+      );
+    },
+    (data) => {
+      setPosts((prev) => prev.filter((post) => post.id !== data.postId));
+    }
+  );
 
   return {
     posts,

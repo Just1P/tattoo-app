@@ -59,7 +59,6 @@ export class ProfileService {
       throw new NotFoundException('Utilisateur non trouvé');
     }
 
-    // Ne pas exposer l'email et le téléphone dans le profil public
     return user;
   }
 

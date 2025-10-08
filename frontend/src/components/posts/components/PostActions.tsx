@@ -32,7 +32,6 @@ export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
     checkLikeStatus();
   }, [post.id]);
 
-  // Mettre à jour le compteur quand le post change
   useEffect(() => {
     setLikesCount(post.likesCount);
   }, [post.likesCount]);
@@ -50,11 +49,9 @@ export function PostActions({ post, onLike, onUnlike }: PostActionsProps) {
       if (isLiked) {
         await onUnlike?.(post.id);
         setIsLiked(false);
-        setLikesCount((prev) => Math.max(0, prev - 1)); // Décrémenter localement
       } else {
         await onLike?.(post.id);
         setIsLiked(true);
-        setLikesCount((prev) => prev + 1); // Incrémenter localement
       }
     } finally {
       setIsLoading(false);

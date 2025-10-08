@@ -31,7 +31,6 @@ export class ProfileController {
     return this.profileService.getProfile(req.user.id);
   }
 
-  // Endpoint public pour voir le profil d'un utilisateur
   @Get('public/:userId')
   async getPublicProfile(
     @Param('userId', ParseUUIDPipe) userId: string,

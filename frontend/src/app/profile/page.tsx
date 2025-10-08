@@ -202,10 +202,9 @@ export default function ProfilePage() {
                       <CreatePostForm
                         onSuccess={async () => {
                           setShowCreateForm(false);
-                          setActiveTab("posts"); // Changer vers l'onglet posts
-                          await refetchMyPosts(); // Rafraîchir la liste des posts
+                          setActiveTab("posts");
+                          await refetchMyPosts();
 
-                          // Scroller vers le premier post (le dernier créé) après un court délai
                           setTimeout(() => {
                             firstPostRef.current?.scrollIntoView({
                               behavior: "smooth",
